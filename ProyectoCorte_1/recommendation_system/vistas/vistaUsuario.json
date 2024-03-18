@@ -1,0 +1,9 @@
+{
+    "_id": "_design/usuarios",
+    "_rev": "1-ccb036e0ab1588999ef0576f419f6592",
+    "views": {
+      "por_nombre": {
+        "map": "function(doc) { if (doc.tipo === 'usuario') { emit(doc.nombre, doc); } }"
+      }
+    }
+  }

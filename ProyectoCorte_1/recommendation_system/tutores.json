@@ -1,0 +1,28 @@
+{
+    "id": "1420",
+    "nombre": "María García",
+    "carrera": "Ciencias de la Computación",
+    "semestre": 8,
+    "calificacionPromedio": 4.5
+},
+{
+    "id": "1280",
+    "nombre": "Rafael Morales",
+    "carrera": "Ingeniería Electrica",
+    "semestre": 8,
+    "calificacionPromedio": 4.7
+},
+{
+    "id": "1332",
+    "nombre": "Diana Campo",
+    "carrera": "Ingeniería de Datos",
+    "semestre": 10,
+    "calificacionPromedio": 4.9
+},
+{
+    "id": "1180",
+    "nombre": "Luciana Carmen",
+    "carrera": "Ingeniería Mecatronica",
+    "semestre": 13,
+    "calificacionPromedio": 4.1
+}
