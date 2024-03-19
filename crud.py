@@ -2,19 +2,52 @@ import couchdb
 import os
 
 # Leer las variables de entorno para la conexión a CouchDB
-COUCHDB_USER = os.environ.get("COUCHDB_USER", "admin")
-COUCHDB_PASSWORD = os.environ.get("COUCHDB_PASSWORD", "admin123")
+COUCHDB_USER = os.environ.get("COUCHDB_USER", "adminBrown")
+COUCHDB_PASSWORD = os.environ.get("COUCHDB_PASSWORD", "12345")
 COUCHDB_HOST = os.environ.get("COUCHDB_HOST", "127.0.0.1")
 COUCHDB_PORT = os.environ.get("COUCHDB_PORT", "5984")
-
 # Conectar a CouchDB
 couch_server = couchdb.Server(f"http://{COUCHDB_USER}:{COUCHDB_PASSWORD}@{COUCHDB_HOST}:{COUCHDB_PORT}/")
 db_name = 'recommendation_system'
+
+
+
 
 try:
     db = couch_server.create(db_name)  # Intentar crear la base de datos si no existe
 except couchdb.http.PreconditionFailed:
     db = couch_server[db_name]  # Si ya existe, usar la existente
+# Crear las vistas en la base de datos
+vistas = {
+    "usuarios/por_id": {"map": "function(doc) { if (doc.tipo === 'usuario') emit(doc.id, doc.nombre); }"},
+    "usuarios/por_cursos": {"map": "function(doc) { if (doc.tipo === 'usuario') emit(doc.nombre, doc.cursos); }"},
+    "usuarios/por_carrera": {"map": "function(doc) { if (doc.tipo === 'usuario') emit(doc.carrera, doc.semestre); }"},
+    "usuarios/por_calificacion": {"map": "function(doc) { if (doc.tipo === 'usuario') emit(doc.nombre, doc.calificacion_curso); }"},
+
+    "tutores/por_id": {"map": "function(doc) { if (doc.tipo === 'tutor') emit(doc.id, doc.nombre); }"},
+    "tutores/por_carrera": {"map": "function(doc) { if (doc.tipo === 'tutor') emit(doc.nombre, doc.carrera); }"},
+    "tutores/por_semestre": {"map": "function(doc) { if (doc.tipo === 'tutor') emit(doc.nombre, doc.semestre); }"},
+    "tutores/por_calificacionPromedio": {"map": "function(doc) { if (doc.tipo === 'tutor') emit(doc.nombre, doc.calificacionPromedio); }"},
+
+    "cursos/por_id": {"map": "function(doc) { if (doc.tipo === 'curso') emit(doc.id, doc.nombre,doc.categoria); }"},
+    "cursos/por_modalidad": {"map": "function(doc) { if (doc.tipo === 'curso') emit(doc.nombre,doc.categoria, doc.modalidad,doc.gratuito,doc.precio); }"},
+    "cursos/por_duracion": {"map": "function(doc) { if (doc.tipo === 'curso') emit(doc.nombre, doc.duracion,doc.certificacion,doc.calificacionPromedio); }"},
+    "cursos/por_tutor": {"map": "function(doc) { if (doc.tipo === 'curso') emit(doc.nombre, doc.tutor); }"}
+}
+# Crear las vistas en la base de datos
+for view_name, view in vistas.items():
+    try:
+        db.save({
+            "_id": f"_design/{view_name}",
+            "views": {
+                view_name.split("/")[1]: view
+            }
+        })
+        print(f"Vista '{view_name}' creada correctamente.")
+    except couchdb.http.ResourceConflict:
+        print(f"La vista '{view_name}' ya existe. Se omitirá su creación.")
+    except Exception as e:
+        print(f"Error al crear vista: {e}")
 
 # Función para consultar usuarios por ID, nombre, carrera o semestre
 def consultar_usuario(key, value):
@@ -46,15 +79,7 @@ def consultar_curso(key, value):
     except Exception as e:
         print(f"Error al consultar cursos: {e}")
 
-# Función para filtrar documentos por un rango de valores para un atributo específico
-def filtrar_por_rango(coleccion, atributo, valor_min, valor_max):
-    try:
-        vista = db.view(f'{coleccion}/por_{atributo}', start_key=valor_min, end_key=valor_max)
-        for fila in vista:
-            documento = fila.value
-            print(f"Documento encontrado - ID: {fila.id}, {atributo}: {documento[atributo]}")
-    except Exception as e:
-        print(f"Error al filtrar documentos por rango: {e}")
+
 
 # Función para crear un nuevo documento en la base de datos
 def crear_documento(coleccion, datos):
@@ -90,38 +115,10 @@ def eliminar_documento(id):
     except Exception as e:
         print(f"Error al eliminar documento: {e}")
 
-# Crear las vistas en la base de datos
-vistas = {
-    "usuarios/por_id": {"map": "function(doc) { if (doc.type === 'usuario') emit(doc._id, doc); }"},
-    "usuarios/por_nombre": {"map": "function(doc) { if (doc.type === 'usuario') emit(doc.nombre, doc); }"},
-    "usuarios/por_carrera": {"map": "function(doc) { if (doc.type === 'usuario') emit(doc.carrera, doc); }"},
-    "usuarios/por_semestre": {"map": "function(doc) { if (doc.type === 'usuario') emit(doc.semestre, doc); }"},
-    "tutores/por_id": {"map": "function(doc) { if (doc.type === 'tutor') emit(doc._id, doc); }"},
-    "tutores/por_nombre": {"map": "function(doc) { if (doc.type === 'tutor') emit(doc.nombre, doc); }"},
-    "tutores/por_carrera": {"map": "function(doc) { if (doc.type === 'tutor') emit(doc.carrera, doc); }"},
-    "tutores/por_calificacionPromedio": {"map": "function(doc) { if (doc.type === 'tutor') emit(doc.calificacionPromedio, doc); }"},
-    "cursos/por_id": {"map": "function(doc) { if (doc.type === 'curso') emit(doc._id, doc); }"},
-    "cursos/por_nombre": {"map": "function(doc) { if (doc.type === 'curso') emit(doc.nombre, doc); }"},
-    "cursos/por_categoria": {"map": "function(doc) { if (doc.type === 'curso') emit(doc.categoria, doc); }"},
-    "cursos/por_modalidad": {"map": "function(doc) { if (doc.type === 'curso') emit(doc.modalidad, doc); }"}
-}
-
-# Crear las vistas en la base de datos
-for view_name, view in vistas.items():
-    try:
-        db.save({
-            "_id": f"_design/{view_name}",
-            "views": {
-                view_name.split("/")[1]: view
-            }
-        })
-    except Exception as e:
-        print(f"Error al crear vista: {e}")
-
 # Ejemplos de uso
 try:
     nuevo_usuario = {
-        "type": "usuario",
+        "tipo": "usuario",
         "nombre": "Juan Mbaperez",
         "carrera": "Ingeniería",
         "semestre": 5
@@ -134,6 +131,6 @@ try:
 
     consultar_curso("categoria", "Tecnología")
 
-    filtrar_por_rango("usuarios", "semestre", 3, 6)  # Ejemplo de filtrar usuarios por semestre entre 3 y 6
+    #filtrar_por_rango("usuarios", "semestre", 3, 6)  # Ejemplo de filtrar usuarios por semestre entre 3 y 6
 except Exception as e:
     print(f"Error: {e}")
