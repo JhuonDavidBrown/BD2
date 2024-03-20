@@ -20,34 +20,48 @@ def consultar_cursos():
         print(f"Categoría: {fila.value[1]}")
         print("---")
 
-def eliminar_usuario():
-    user_id = input("Ingresa el ID del usuario que deseas eliminar: ")
-    user_doc = db.get(user_id)
-
-    if user_doc:
-        confirmation = input(f"¿Estás seguro de eliminar el usuario con ID {user_id}? (s/n): ").lower()
-        if confirmation == "s":
-            db.delete(user_doc)
-            print(f"Usuario con ID {user_id} eliminado correctamente.")
-        else:
-            print("Operación cancelada.")
-    else:
-        print(f"No se encontró un usuario con el ID {user_id}.")
-
 
 def eliminar_curso():
-    curso_id = input("Ingresa el ID del usuario que deseas eliminar: ")
-    curso_doc = db.get(curso_id)
-
-    if curso_doc:
-        confirmation = input(f"¿Estás seguro de eliminar el usuario con ID {curso_id}? (s/n): ").lower()
-        if confirmation == "s":
-            db.delete(curso_doc)
-            print(f"Usuario con ID {curso_id} eliminado correctamente.")
+    curso_id = input("Ingresa el ID del curso que deseas eliminar: ")
+    vista_por_id = db.view('cursos/por_id', key=curso_id)
+    filas = list(vista_por_id)
+    
+    if len(filas) > 0:
+        doc_id = filas[0].id  # Obtener el ID del documento
+        curso_doc = db.get(doc_id)  # Obtener el documento completo
+        if curso_doc:
+            confirmation = input(f"¿Estás seguro de eliminar el curso con ID {curso_id}? (s/n): ").lower()
+            if confirmation == "s":
+                db.delete(curso_doc)
+                print(f"Curso con ID {curso_id} eliminado correctamente.")
+            else:
+                print("Operación cancelada.")
         else:
-            print("Operación cancelada.")
+            print(f"No se encontró un curso con el ID {curso_id}.")
     else:
-        print(f"No se encontró un usuario con el ID {curso_id}.")
+        print(f"No se encontró un curso con el ID {curso_id}.")
+#mirarlo
+def eliminar_usuario():
+    curso_id = input("Ingresa el ID del curso que deseas eliminar: ")
+    vista_por_id = db.view('cursos/por_id', key=curso_id)
+    filas = list(vista_por_id)
+    
+    if len(filas) > 0:
+        doc_id = filas[0].id  # Obtener el ID del documento
+        curso_doc = db.get(doc_id)  # Obtener el documento completo
+        if curso_doc:
+            confirmation = input(f"¿Estás seguro de eliminar el curso con ID {curso_id}? (s/n): ").lower()
+            if confirmation == "s":
+                db.delete(curso_doc)
+                print(f"Curso con ID {curso_id} eliminado correctamente.")
+            else:
+                print("Operación cancelada.")
+        else:
+            print(f"No se encontró un curso con el ID {curso_id}.")
+    else:
+        print(f"No se encontró un curso con el ID {curso_id}.")
+
+
 
 def crear_curso():
     print("Ingresa los datos del nuevo curso:")

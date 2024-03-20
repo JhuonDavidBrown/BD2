@@ -1,0 +1,155 @@
+{
+    "id": "3c656694cfedf4b678fb6c9e2101ffba",
+    "key": "3c656694cfedf4b678fb6c9e2101ffba",
+    "value": {
+     "rev": "4-fbd40b7816f8f6de4b21996f21e66d94"
+    },
+    "doc": {
+     "_id": "3c656694cfedf4b678fb6c9e2101ffba",
+     "_rev": "4-fbd40b7816f8f6de4b21996f21e66d94",
+     "tipo": "usuario",
+     "id": "2230150",
+     "nombre": "Juan Mbaperez",
+     "carrera": "Ingeniería Biomédica",
+     "semestre": 6,
+     "cursos": [
+      "271",
+      "497"
+     ],
+     "calificacion_curso": [
+      {
+       "curso": "387",
+       "calificación": 4
+      },
+      {
+       "curso": "189",
+       "calificación": 3.5
+      }
+     ],
+     "calificacion_tutor": [
+      {
+       "tutor": "1280",
+       "calificacion": 4
+      },
+      {
+       "tutor": "1180",
+       "calificacion": 3.5
+      }
+     ]
+    }
+},
+   
+{
+    "id": "3c656694cfedf4b678fb6c9e2102173c",
+    "key": "3c656694cfedf4b678fb6c9e2102173c",
+    "value": {
+     "rev": "3-6250a8b5bd0dfa67ec1b00447ee8d773"
+    },
+    "doc": {
+     "_id": "3c656694cfedf4b678fb6c9e2102173c",
+     "_rev": "3-6250a8b5bd0dfa67ec1b00447ee8d773",
+     "tipo": "usuario",
+     "id": "2215890",
+     "nombre": "Mario Mingueza",
+     "carrera": "Marketing",
+     "semestre": 8,
+     "cursos": [
+      "290",
+      "340"
+     ],
+     "calificacion_curso": [
+      {
+       "curso": "271",
+       "calificación": 4.5
+      },
+      {
+       "curso": "189",
+       "calificación": 4.5
+      }
+     ],
+     "calificacion_tutor": [
+      {
+       "tutor": "1180",
+       "calificacion": 3
+      }
+     ]
+    }
+},
+
+{
+    "id": "3c656694cfedf4b678fb6c9e21022421",
+    "key": "3c656694cfedf4b678fb6c9e21022421",
+    "value": {
+     "rev": "3-44585e73540e4c645fc65bd1f49336ff"
+    },
+    "doc": {
+     "_id": "3c656694cfedf4b678fb6c9e21022421",
+     "_rev": "3-44585e73540e4c645fc65bd1f49336ff",
+     "tipo": "usuario",
+     "id": "2215420",
+     "nombre": "Juan David Ochoa",
+     "carrera": "Ingeniería Informática",
+     "semestre": 5,
+     "cursos": [
+      "290",
+      "340"
+     ],
+     "calificacion_curso": [
+      {
+       "curso": "497",
+       "calificación": 3.8
+      },
+      {
+       "curso": "387",
+       "calificación": 3.9
+      }
+     ],
+     "calificacion_tutor": [
+      {
+       "tutor": "1280",
+       "calificacion": 4
+      },
+      {
+       "tutor": "1420",
+       "calificacion": 3.5
+      }
+     ]
+    }
+},
+
+{
+    "id": "3c656694cfedf4b678fb6c9e21023620",
+    "key": "3c656694cfedf4b678fb6c9e21023620",
+    "value": {
+     "rev": "3-cd01fe7fd54b9456fa0c2cbdb7f1ef25"
+    },
+    "doc": {
+     "_id": "3c656694cfedf4b678fb6c9e21023620",
+     "_rev": "3-cd01fe7fd54b9456fa0c2cbdb7f1ef25",
+     "tipo": "usuario",
+     "id": "2215412",
+     "nombre": "Mariana Palacios",
+     "carrera": "Ingeniería Mecatronica",
+     "semestre": 4,
+     "cursos": [
+      "497",
+      "387"
+     ],
+     "calificacion_curso": [
+      {
+       "curso": "271",
+       "calificación": 5
+      },
+      {
+       "curso": "189",
+       "calificación": 5
+      }
+     ],
+     "calificacion_tutor": [
+      {
+       "tutor": "1180",
+       "calificacion": 4.8
+      }
+     ]
+    }
+}

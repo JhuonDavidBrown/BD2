@@ -1,0 +1,68 @@
+{
+    "id": "3c656694cfedf4b678fb6c9e21025571",
+    "key": "3c656694cfedf4b678fb6c9e21025571",
+    "value": {
+     "rev": "3-044687b1355e25e3aa02c13515bfb779"
+    },
+    "doc": {
+     "_id": "3c656694cfedf4b678fb6c9e21025571",
+     "_rev": "3-044687b1355e25e3aa02c13515bfb779",
+     "tipo": "tutor",
+     "id": "1420",
+     "nombre": "María García",
+     "carrera": "Ciencias de la Computación",
+     "semestre": 8,
+     "calificacionPromedio": 4.5
+    }
+},
+{
+    "id": "3c656694cfedf4b678fb6c9e210264c8",
+    "key": "3c656694cfedf4b678fb6c9e210264c8",
+    "value": {
+     "rev": "4-0a2f4ed6538306812a41609e3aa742de"
+    },
+    "doc": {
+     "_id": "3c656694cfedf4b678fb6c9e210264c8",
+     "_rev": "4-0a2f4ed6538306812a41609e3aa742de",
+     "tipo": "tutor",
+     "id": "1280",
+     "nombre": "Rafael Morales",
+     "carrera": "Ingeniería Electrica",
+     "semestre": 8,
+     "calificacionPromedio": 4.7
+    }
+},
+{
+    "id": "3c656694cfedf4b678fb6c9e21027767",
+    "key": "3c656694cfedf4b678fb6c9e21027767",
+    "value": {
+     "rev": "3-0563d4e41d70e53955f33bcd60f73a16"
+    },
+    "doc": {
+     "_id": "3c656694cfedf4b678fb6c9e21027767",
+     "_rev": "3-0563d4e41d70e53955f33bcd60f73a16",
+     "tipo": "tutor",
+     "id": "1332",
+     "nombre": "Diana Campo",
+     "carrera": "Ingeniería de Datos",
+     "semestre": 10,
+     "calificacionPromedio": 4.9
+    }
+},
+{
+    "id": "3c656694cfedf4b678fb6c9e2102896f",
+    "key": "3c656694cfedf4b678fb6c9e2102896f",
+    "value": {
+     "rev": "2-c7bd0e08cc52cbd80c1226d4d52faf7f"
+    },
+    "doc": {
+     "_id": "3c656694cfedf4b678fb6c9e2102896f",
+     "_rev": "2-c7bd0e08cc52cbd80c1226d4d52faf7f",
+     "tipo": "tutor",
+     "id": "1180",
+     "nombre": "Luciana Carmen",
+     "carrera": "Ingeniería Mecatronica",
+     "semestre": 13,
+     "calificacionPromedio": 4.1
+    }
+}

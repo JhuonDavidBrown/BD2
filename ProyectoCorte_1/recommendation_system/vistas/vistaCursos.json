@@ -1,0 +1,23 @@
+{
+  "id": "_design/cursos",
+  "key": "_design/cursos",
+  "value": {
+   "rev": "11-2f296a14d78ea90f5038a79ba7a67147"
+  },
+  "doc": {
+   "_id": "_design/cursos",
+   "_rev": "11-2f296a14d78ea90f5038a79ba7a67147",
+   "views": {
+    "por_id": {
+     "map": "function(doc) {\n    if (doc.tipo === 'curso') emit(doc.id, [doc.nombre, doc.categoria]);\n}"
+    },
+    "por_tutor": {
+     "map": "function (doc) {\n  if (doc.tipo === 'curso') {\n    emit([doc.tutor, doc.id], {\n      nombre_curso: doc.nombre,\n      nombre_tutor: null});\n  } else if (doc.tipo === 'tutor') {\n    emit(doc.id, {nombre_tutor: doc.nombre});\n  }\n  \n}"
+    },
+    "por_categoria": {
+     "map": "function (doc) {\n  if(doc.tipo===\"curso\")emit(doc.modalidad,[doc.nombre,doc.precio, doc.duracion,doc.certificado]);\n}"
+    }
+   },
+   "language": "javascript"
+  }
+ }

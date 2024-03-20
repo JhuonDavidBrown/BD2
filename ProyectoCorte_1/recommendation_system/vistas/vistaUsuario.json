@@ -1,9 +1,20 @@
 {
-    "_id": "_design/usuarios",
-    "_rev": "1-ccb036e0ab1588999ef0576f419f6592",
-    "views": {
+    "id": "_design/usuario",
+    "key": "_design/usuario",
+    "value": {
+     "rev": "6-e08dd2518d3a53c59d9ebeb30fa992cc"
+    },
+    "doc": {
+     "_id": "_design/usuario",
+     "_rev": "6-e08dd2518d3a53c59d9ebeb30fa992cc",
+     "views": {
+      "por_id": {
+       "map": "function (doc) {\n  if(doc.tipo===\"usuario\"){\n      emit(doc.id,[doc.nombre,doc.carrera,doc.semestre,doc.cursos,doc.calificacion_curso] );\n  }\n}"
+      },
       "por_nombre": {
-        "map": "function(doc) { if (doc.tipo === 'usuario') { emit(doc.nombre, doc); } }"
+       "map": "function (doc) {\n  \n  if(doc.tipo===\"usuario\"){\n      emit(doc.nombre,[doc.calificacion_tutor]);\n\n  }\n}"
       }
+     },
+     "language": "javascript"
     }
-  }
+   }

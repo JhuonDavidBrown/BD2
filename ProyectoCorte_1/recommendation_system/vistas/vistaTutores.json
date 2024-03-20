@@ -1,0 +1,20 @@
+{
+    "id": "_design/tutores",
+    "key": "_design/tutores",
+    "value": {
+     "rev": "2-4f076186a5f34202f0ec84f60d934277"
+    },
+    "doc": {
+     "_id": "_design/tutores",
+     "_rev": "2-4f076186a5f34202f0ec84f60d934277",
+     "views": {
+      "por_calificacion": {
+       "map": "function (doc) {\n  if(doc.tipo===\"tutor\")emit(doc.calificacionPromedio,[doc.nombre,doc.carrera]);\n}"
+      },
+      "por_nombre": {
+       "map": "function (doc) {\n  if(doc.tipo===\"tutor\")  emit(doc.nombre,[doc.id,doc.carrera,doc.semestre]);\n}"
+      }
+     },
+     "language": "javascript"
+    }
+   }
