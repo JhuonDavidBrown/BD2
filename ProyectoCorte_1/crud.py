@@ -1,16 +1,12 @@
 import couchdb
-import os
-# Leer las variables de entorno para la conexión a CouchDB
-COUCHDB_USER = os.environ.get("COUCHDB_USER", "adminBrown")
-COUCHDB_PASSWORD = os.environ.get("COUCHDB_PASSWORD", "12345")
-COUCHDB_HOST = os.environ.get("COUCHDB_HOST", "127.0.0.1")
-COUCHDB_PORT = os.environ.get("COUCHDB_PORT", "5984")
-# Conectar a CouchDB
+COUCHDB_USER = "adminBrown"
+COUCHDB_PASSWORD = "12345"
+COUCHDB_HOST = "127.0.0.1"
+COUCHDB_PORT =  "5984"
 couch_server = couchdb.Server(f"http://{COUCHDB_USER}:{COUCHDB_PASSWORD}@{COUCHDB_HOST}:{COUCHDB_PORT}/")
 db_name = 'recommendation_system'
 db = couch_server[db_name]
 
-# Consultar la vista "por_id"
 def consultar_cursos():
     vista_por_id = db.view('cursos/por_id')
     for fila in vista_por_id:
@@ -107,8 +103,8 @@ def modificar_curso():
     filas = list(vista_por_id)
 
     if len(filas) > 0:
-        doc_id = filas[0].id  # Obtener el ID del documento
-        curso_doc = db.get(doc_id)  # Obtener el documento completo
+        doc_id = filas[0].id  
+        curso_doc = db.get(doc_id)  
         if curso_doc:
             print(f"Valores actuales del curso con ID {curso_id}:")
             print(f"Nombre: {curso_doc['nombre']}")
@@ -168,7 +164,7 @@ def menu():
             5: eliminar_curso,
             6: crear_curso,
             7: modificar_curso,
-            8: lambda: None  # Opción de salir
+            8: lambda: None  
         }
 
         funcion = switch_case.get(opcion, lambda: print("Opción inválida. Intenta de nuevo."))
