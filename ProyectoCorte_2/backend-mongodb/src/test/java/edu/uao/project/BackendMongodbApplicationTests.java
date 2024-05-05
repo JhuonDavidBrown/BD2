@@ -1,10 +1,10 @@
-package project.resapi;
+package edu.uao.project;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ResapiApplicationTests {
+class BackendMongodbApplicationTests {
 
 	@Test
 	void contextLoads() {
